@@ -46,12 +46,15 @@ def logistic_compression(input_power, gain=30, p1dB=46, psat=50, smoothness=0.5)
     # Clip to avoid overflow/underflow in exp
     linear_output_clipped = np.clip(linear_output, p1dB - 20, p1dB + 20)
     
+    # Compression formula works well for 2D Regression plotting, but introduces issues with 3D surface plotting
+    # I may move more towards a strict Rapp's Model for the artificial data generation.
     compressed_output = psat / (1 + np.exp(-smoothness * (linear_output_clipped - p1dB)))
 
     # Ensure final output doesn't exceed Psat
     return np.clip(compressed_output, None, psat)
 
 # 1. Generate Simulated SATCOM Dataset
+# This will not be necessary when moving to real data
 def generate_satcom_data(samples=1000, noise_level=0.5, fixed_hpa_gain=30, p1dB=47, psat=50):
     """
     Generate synthetic SATCOM data, including forced zero attenuation samples for regression.
@@ -127,6 +130,8 @@ def visualize_model(df, model, scaler, poly, fixed_hpa_gain=30, p1dB=47, psat=50
     """
     3D Visualization of SATCOM Output Power over Effective Input Power and Attenuation.
     """
+
+    # Part 1: 3D Surface Regression Plot
     print("Generating refined 3D plot with attenuation and effective input power...")
 
     # Set axis ranges
@@ -201,17 +206,16 @@ def visualize_model(df, model, scaler, poly, fixed_hpa_gain=30, p1dB=47, psat=50
 
     plt.show()
 
-    # ===============================================
-    # PART 2: 2D REGRESSION PLOT + SAVE (Logistic Fit)
-    # ===============================================
+    
+    # PART 2: 2D Regression Plot
     if save_plot:
-        print("\nCreating 2D regression plot...")
+        print("\nCreating 2D regression plot")
 
         df_filtered = df[(df['Attenuation_D_B'] <= 0.1) & (df['Output_Power_dBm'] >= 35)]
         print(f"Filtered data points: {len(df_filtered)}")
 
         if df_filtered.empty:
-            print("⚠️  No data points found with Attenuation == 0 and Output Power >= 35 dBm.")
+            print("No data points found with Attenuation == 0 and Output Power >= 35 dBm.")
             return
 
         X_input = df_filtered['Input_Power_dBm'].values
@@ -294,6 +298,7 @@ def save_model(model, scaler, poly):
 
 # 7. Main Execution Block
 if __name__ == '__main__':
+    # initializing variables for ease of adjustment
     p1dB = 47
     psat = 50
     fixed_hpa_gain = 30
