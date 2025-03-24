@@ -1,8 +1,22 @@
 #=====================================README=====================================
 """
-    Updated SATCOM HPA Gain Compression Model with Logistic Curve:
-    - Simplified visualization to focus on Effective Input Power vs Output Power.
-    - Logistic compression curve replaces previous methods.
+    It should be noted that since this is more of a Proof of Concept and uses programmatically generated
+    samples of data, this does not take into account ALL possible gains/losses that occur during Signal creation/propagation.
+
+    Additionally, it is entirely possible that the mathematical functions are not used to correctly represent
+    realistic RF behavior.
+
+    This is very much a work in progress and it's meant to be more of a learning project for me, with the future potential of incorporating real RF data by using
+    a full duplex SDR.
+
+    Package documentations All-In-One:
+    Scikit-learn documentation: https://scikit-learn.org/stable/user_guide.html
+    Polynomial Features: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html
+    StandardScaler: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+    Ridge Regression: https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression
+    Cross-validation: https://scikit-learn.org/stable/modules/cross_validation.html
+    Matplotlib 3D plotting: https://matplotlib.org/stable/gallery/mplot3d/index.html
+    RF Amplifier Compression: https://en.wikipedia.org/wiki/1_dB_compression_point
 """
 #=====================================README=====================================
 
