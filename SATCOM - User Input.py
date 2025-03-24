@@ -11,7 +11,7 @@ import os
 try:
         BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # doesn't work well in IDE's
 except NameError:
-        BASE_DIR = os.getcwd() # Grabs current working direction as a str
+        BASE_DIR = os.getcwd() # Grabs current working direction as a str (Not tested on Linux)
 
 # Full paths to saved model objects
 MODEL_PATH = os.path.join(BASE_DIR, 'satcom_model.pkl')
