@@ -4,9 +4,8 @@ import sys
 import time
 import os
 
-# =========================================
+
 # 1. Load Trained Model and Preprocessors
-# =========================================
 
 # Base directory where your files are stored
 try:
@@ -28,9 +27,9 @@ except FileNotFoundError as e:
     print(f"Error loading model or preprocessors: {e}")
     sys.exit(1)
 
-# =========================================
+
 # 2. User Input Function (With Validations)
-# =========================================
+
 def get_user_input():
     print("\nEnter the SATCOM parameters (type 'exit' to quit):")
 
@@ -63,9 +62,9 @@ def get_user_input():
 
         return input_power, attenuation
 
-# =========================================
+
 # 3. Prediction Function (With Fixed HPA Gain of 30dB)
-# =========================================
+
 def predict_output_power(input_power, attenuation, fixed_hpa_gain=30):
     """
     Predict output power based on user input and trained AI model.
@@ -85,9 +84,9 @@ def predict_output_power(input_power, attenuation, fixed_hpa_gain=30):
         print(f"Prediction failed: {e}")
         return None
 
-# =========================================
+
 # 4. Logging Function (Optional)
-# =========================================
+
 #def log_prediction(input_power, attenuation, predicted_power, filename='prediction_log.csv'):
     """
     Logs predictions to a CSV file for later analysis.
@@ -95,9 +94,9 @@ def predict_output_power(input_power, attenuation, fixed_hpa_gain=30):
     with open(filename, 'a') as file:
         file.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')},{input_power},{attenuation},{predicted_power:.2f}\n")
 
-# =========================================
+
 # 5. Main Execution Loop
-# =========================================
+
 def main():
     PSAT = 50
 
@@ -128,8 +127,8 @@ def main():
         else:
             print("Prediction returned no value.\n")
 
-# =========================================
+
 # 6. Run the Script
-# =========================================
+
 if __name__ == '__main__':
     main()
