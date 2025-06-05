@@ -3,7 +3,7 @@
     It should be noted that since this is more of a Proof of Concept and uses programmatically generated
     samples of data, this does not take into account ALL possible gains/losses that occur during Signal creation/propagation.
 
-    Additionally, it is entirely possible that the mathematical functions are not used to correctly represent
+    Additionally, it is entirely possible that the mathematical functions are not correctly used to represent
     realistic RF behavior.
 
     This is very much a work in progress and it's meant to be more of a learning project for me, with the future potential of incorporating real RF data by using
